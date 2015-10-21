@@ -8,6 +8,7 @@
 *.war
 *.ear
 
+<<<<<<< HEAD
 people1.xml
 src/assignment
 src/ivy
@@ -23,3 +24,7 @@ src/build
 !/.gitignore
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
+=======
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+>>>>>>> a6caf59f1263cbea15c716bdb60e10aa9c1d9064
