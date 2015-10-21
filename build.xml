@@ -112,6 +112,15 @@
 
     <!-- executes JAXBMarshaller class  -->
 
+    <target name="clean">
+        <echo message="Clean has been called" />
+        <delete dir="${build.dir}" />
+        <echo message="${build.dir} has been deleted" />
+        <delete dir="${src.dir}/${xjc.package}" />
+        <echo message="${src.dir}/${xjc.package} has been deleted" />
+        <delete file="people1.xml" />
+        <echo message="directory clean" />
+    </target>
 
     <target name="execute.UnMarshaller">
         <echo message="Executing UnMarshaller" />
@@ -125,4 +134,70 @@
         </java>
     </target>
 
+    <target name="execute.getAllPeople">
+        <echo message="-> Print all people details" />
+        <echo message="" />
+        <java classname="main.HealthProfileReader"
+              classpath="${build.dir}">
+            <arg line="getall" />
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="execute.getHealthFromPid_5">
+        <echo message="-> Print all people details" />
+        <echo message="" />
+        <java classname="main.HealthProfileReader"
+              classpath="${build.dir}">
+            <arg line="5" />
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="execute.getWeightByCondition">
+        <echo message="-> Printing people with Weight&gt;75 " />
+        <echo message="" />
+        <java classname="main.HealthProfileReader"
+              classpath="${build.dir}">
+            <arg line="gw" />
+            <arg line="'&gt;'" />
+            <arg line="'75'" />
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+    <target name="execute.getHeightByCondition">
+        <echo message="-> Printing people with Weight&gt;75 " />
+        <echo message="" />
+        <java classname="main.HealthProfileReader"
+              classpath="${build.dir}">
+            <arg line="gh" />
+            <arg line="'&gt;'" />
+            <arg line="'1.90'" />
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+    <target name="execute.evaluation" depends="compile,execute.JAXBMarshaller, execute.getAllPeople,execute.getHeightByCondition,execute.getWeightByCondition,
+		execute.UnMarshaller,execute.getHealthFromPid_5">
+        <echo message="Executing everything!" />
+    </target>
 </project>

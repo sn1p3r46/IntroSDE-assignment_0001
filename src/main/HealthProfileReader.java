@@ -179,48 +179,6 @@ public class HealthProfileReader {
 		return personList;
 		}
 
-    private void displayHealthProfile(String PId){
-		try{
-			Person p = getPersonObjectById(PId);
-			if (p==null){
-				System.out.println("No person in DB");
-			}else{
-				System.out.println(p.gethProfile().toString());
-			}
-		}
-		catch(XPathExpressionException e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	private void getHeight(String id){
-		try{
-			Person p = getPersonObjectById(id);
-			if (p==null){
-				System.out.println("No person in DB");
-			}else{
-				System.out.println(p.gethProfile().getHeight());
-			}
-		}
-		catch(XPathExpressionException e) {
-			e.printStackTrace();
-		}		
-	}
-
-	private void getWeight(String id){
-		try{
-			Person p = getPersonObjectById(id);
-			if (p==null){
-				System.out.println("No person in DB");
-			}else{
-				System.out.println(p.gethProfile().getWeight());
-			}
-		}
-		catch(XPathExpressionException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		HealthProfileReader hPR = new HealthProfileReader();
@@ -245,7 +203,7 @@ public class HealthProfileReader {
 
 		} else if(argCount == 1){
 			if(args[0].equals("getall")){
-				hPR.getAllPersonsObjects();
+				hPR.getAllPeople();
 			} else {
 				System.out.println("\n\nThe health profile of the given id is:");
 				hPR.displayHealthProfileX(args[0]);
@@ -254,12 +212,10 @@ public class HealthProfileReader {
 
 				if(args[0].equals("gh")){
 					System.out.println("\n \nThe Height for the given id is:");
-					hPR.getHeight(args[1]);
 					hPR.getxHeight(args[1]);
 				}
 				else if(args[0].equals("gw")){
 					System.out.println(" \n\nThe Weight for the given id is:");
-					hPR.getWeight(args[1]);
 					hPR.getXWeight(args[1]);
 				}
 
@@ -270,12 +226,18 @@ public class HealthProfileReader {
 		// add the case where there are 3 parameters, the third being a string that matches "weight", "height" or "bmi"
 		}
 
+	private void getAllPeople() throws XPathExpressionException{
+		XPathExpression expr = xpath.compile ("//person");
+		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+		for(int i=0; i<nodes.getLength(); i++){
+			System.out.println(nodes.item(i).getTextContent());
+		}
+	}
 	private void displayHealthProfileX(String PId) throws XPathExpressionException{
 		XPathExpression expr = xpath.compile("//person[@id='" + PId + "']/healthprofile");
 		//("//person[weight " + operator + "'" + value + "']");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 		for(int i=0; i<nodes.getLength(); i++){
-
 			System.out.println(nodes.item(i).getTextContent());
 		}
 		if(nodes.getLength()==0){System.out.println("\n \n The given ID is not in our database.");}
