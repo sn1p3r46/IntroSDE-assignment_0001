@@ -196,7 +196,7 @@
             </classpath>
         </java>
     </target>
-    <target name="execute.evaluation" depends="compile,execute.JAXBMarshaller, execute.getAllPeople,execute.getHeightByCondition,execute.getWeightByCondition,
+    <target name="execute.evaluation" depends="compile ,execute.JAXBMarshaller, execute.getAllPeople,execute.getHeightByCondition,execute.getWeightByCondition,
 		execute.UnMarshaller,execute.getHealthFromPid_5">
         <echo message="Executing everything!" />
     </target>
