@@ -1,6 +1,6 @@
 # IntroSDE
 
-Andrea Galloni - andreagalloni92[at][goooooglemail][dot][com] 
+Andrea Galloni - <code>andreagalloni92[at][goooooglemail][dot][com]</code>
 
 
 <h1>introsde-2015-assignment-1</h1>
