@@ -4,6 +4,10 @@ package assignment;
  * Created by alexander on 20/10/15.
  */
 
+// AIM:
+// given some person instances it will create an xml file using
+// auto generated classes (after executing look assignment.generated)
+// Marshalling
 import assignment.generated.*;
 
 import javax.xml.bind.*;
@@ -19,6 +23,8 @@ public class Marshaller {
     public void generateXMLDocument(File xmlDocument) throws java.text.ParseException, DatatypeConfigurationException {
         try {
 
+            // Creates a JAXB context
+
             JAXBContext jaxbContext = JAXBContext.newInstance("assignment.generated");
             javax.xml.bind.Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty("jaxb.formatted.output", true);
@@ -26,7 +32,9 @@ public class Marshaller {
 
             PeopleType people = factory.createPeopleType();
 
+            // Creates three persons instances within the relative health profile
 
+            // 1
             PersonType p = factory.createPersonType();
             p.setId(new BigInteger("1"));
             p.setFirstname("gianni");
@@ -39,7 +47,7 @@ public class Marshaller {
             healthProfile1.setLastupdate(DatatypeFactory.newInstance().newXMLGregorianCalendar(2011, 3, 4, 0, 0, 0, 0, 0));
             p.setHealthprofile(healthProfile1);
 
-
+            // 2
             PersonType p2 = factory.createPersonType();
             p2.setId(new BigInteger("2"));
             p2.setFirstname("Anna");
@@ -52,7 +60,7 @@ public class Marshaller {
             healthProfile2.setLastupdate(DatatypeFactory.newInstance().newXMLGregorianCalendar(2013, 3, 6, 0, 0, 0, 0, 0));
             p2.setHealthprofile(healthProfile2);
 
-
+            // 3
             PersonType p3 = factory.createPersonType();
             p3.setId(new BigInteger("3"));
             p3.setFirstname("Enza");
@@ -68,6 +76,9 @@ public class Marshaller {
             people.getPerson().add(p);
             people.getPerson().add(p2);
             people.getPerson().add(p3);
+
+            // uses the java generics to create a custom JAXBElement
+            // and then creates a file with a proper form
 
             JAXBElement<PeopleType> peopleElement = factory
                     .createPeople(people);
@@ -88,8 +99,14 @@ public class Marshaller {
 
 
     public static void main(String[] argv) throws DatatypeConfigurationException, java.text.ParseException {
+
+        //stores the output filename string in a variable
         String xmlDocument = "people1.xml";
+
+        //creates an istance of itself
         Marshaller jaxbMarshaller = new Marshaller();
+
+        // calls the method above
         jaxbMarshaller.generateXMLDocument(new File(xmlDocument));
     }
 }

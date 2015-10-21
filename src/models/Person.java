@@ -40,14 +40,6 @@ public class Person {
 		this.setBirthday(birth);
 		this.setId(id);
 	}
-//	public Person() {
-//		this.firstname="Nuovo";
-//		this.lastname="Utente";
-//		this.hProfile=new HealthProfile();
-//		this.setBirthday();
-//		this.setId();
-//	}
-
 
 	// classes have methods, which are basically pieces of programs that can be executed on objects of the class
 	// this dummy class, has only 'accesor' methods (i.e. methods to access its properties, which are all private)
@@ -69,9 +61,6 @@ public class Person {
 	public void setId(Long id){
 		this.id=id;
 	}
-	public void setId(){
-		this.id = new Long(RandomHelper.getRandomNumber(1, 9999));
-	}
 	public Long getId(){
 		return this.id;	
 	}
@@ -80,6 +69,7 @@ public class Person {
 	public void setBirthday(){
 		setBirthday(RandomHelper.getRandomDate());
 	}
+
 	public void setBirthday(String data){
 			this.birth = data;
 		}

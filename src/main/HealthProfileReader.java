@@ -17,9 +17,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-
-
 import models.HealthProfile;
 import models.Person;
 
@@ -28,7 +25,9 @@ public class HealthProfileReader {
 	
     Document doc;
     XPath xpath;
-	
+
+
+	// this function load the .xml file
     public void loadXML() throws ParserConfigurationException, SAXException, IOException {
 
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -40,6 +39,7 @@ public class HealthProfileReader {
         getXPathObj();
     }
 
+	//this function returns an xpath object, it is used to evaluate XPATH expressions
     public XPath getXPathObj() {
 
         XPathFactory factory = XPathFactory.newInstance();
@@ -47,138 +47,7 @@ public class HealthProfileReader {
         return xpath;
     }
 
-    private Person getPersonObjectByNameAndSurname(String name, String surname) throws XPathExpressionException {
-    	XPathExpression expr = xpath.compile("//person[firstname='" + name + "' and lastname='"+ surname +"']");
-        Node node = (Node) expr.evaluate(doc, XPathConstants.NODE);
-        //System.out.println(node);
-        if (node!=null){
-			Long pID = Long.valueOf(node.getAttributes().getNamedItem("id").getNodeValue());
-        	NodeList attrList = node.getChildNodes();
-	        Node prop;
-	        String xName = null;
-	        String xSurname = null;
-			String xbirth = null;
-	        double h = 0;
-	        double w = 0;
-			String xuDate = null;
-			double xbmi = 0;
-	        for(int i=0; i < attrList.getLength(); i++){
-	        	prop = attrList.item(i);
-	        	if(prop.getNodeName()=="firstname"){
-	        		xName = prop.getTextContent();
-
-				}else if(prop.getNodeName()=="lastname"){
-					xSurname= prop.getTextContent();
-				}else if(prop.getNodeName()=="birthdate"){
-					xbirth = prop.getTextContent();
-	        	}else if(prop.getNodeName()=="healthprofile"){
-	        		NodeList hpAttributesList = prop.getChildNodes();
-	        		for (int j = 0; j< hpAttributesList.getLength(); j++ ){
-	        			Node hpProp = hpAttributesList.item(j);
-	        			if(hpProp.getNodeName()=="weight"){ w = Double.valueOf(hpProp.getTextContent());}
-	        			if(hpProp.getNodeName()=="height"){ h = Double.valueOf(hpProp.getTextContent());}
-						if(hpProp.getNodeName()=="lastupdate"){ xuDate = hpProp.getTextContent();}
-						if(hpProp.getNodeName()=="bmi"){ xbmi = Double.valueOf(hpProp.getTextContent());}
-	        		}
-	        	}
-	        }
-	        HealthProfile hp = new HealthProfile(w, h, xbmi, xuDate);
-	        return new Person(xName,xSurname,hp,xbirth, pID);
-        }else{
-        	return null;
-        }
-    }
-
-	private Person getPersonObjectById(String PId) throws XPathExpressionException {
-		XPathExpression expr = xpath.compile("//person[@id='" + PId + "']");
-		Node node = (Node) expr.evaluate(doc, XPathConstants.NODE);
-		if (node!=null){
-			NodeList attrList = node.getChildNodes();
-			Node prop;
-			String xName = null;
-			String xSurname = null;
-			double h = 0;
-			double w = 0;
-			for(int i=0; i < attrList.getLength(); i++){
-				prop = attrList.item(i);
-				if(prop.getNodeName()=="firstname"){
-					xName = prop.getTextContent();
-
-				}else if(prop.getNodeName()=="lastname"){
-					xSurname= prop.getTextContent();
-
-				}else if(prop.getNodeName()=="healthprofile"){
-					NodeList hpAttributesList = prop.getChildNodes();
-					for (int j = 0; j< hpAttributesList.getLength(); j++ ){
-						Node hpProp = hpAttributesList.item(j);
-						if(hpProp.getNodeName()=="weight"){ w = Double.valueOf(hpProp.getTextContent());}
-						if(hpProp.getNodeName()=="height"){ h = Double.valueOf(hpProp.getTextContent());}
-					}
-				}
-			}
-			HealthProfile hp = new HealthProfile(w, h);
-			return new Person(xName,xSurname,hp);
-		}else{
-			return null;
-		}
-	}
-
-	public List<Person> getAllPersonsObjects() throws XPathExpressionException {
-
-		XPathExpression expr = xpath.compile ("//person");
-		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		List<Person> personList = new ArrayList<Person>();
-		System.out.println(nodes.getLength());
-
-		Node node;
-
-		for (int p = 0; p < nodes.getLength(); p++) {
-			node = nodes.item(p);
-			if (node!=null){
-				Long pID = Long.valueOf(node.getAttributes().getNamedItem("id").getNodeValue());
-				NodeList attrList = node.getChildNodes();
-				Node prop;
-				String xName = null;
-				String xSurname = null;
-				String xbirth = null;
-				double h = 0;
-				double w = 0;
-				String xuDate = null;
-				double xbmi = 0;
-				for(int i=0; i < attrList.getLength(); i++){
-					prop = attrList.item(i);
-					if(prop.getNodeName()=="firstname"){
-						xName = prop.getTextContent();
-
-					}else if(prop.getNodeName()=="lastname"){
-						xSurname= prop.getTextContent();
-					}else if(prop.getNodeName()=="birthdate"){
-						xbirth = prop.getTextContent();
-					}else if(prop.getNodeName()=="healthprofile"){
-						NodeList hpAttributesList = prop.getChildNodes();
-						for (int j = 0; j< hpAttributesList.getLength(); j++ ){
-							Node hpProp = hpAttributesList.item(j);
-							if(hpProp.getNodeName()=="weight"){ w = Double.valueOf(hpProp.getTextContent());}
-							if(hpProp.getNodeName()=="height"){ h = Double.valueOf(hpProp.getTextContent());}
-							if(hpProp.getNodeName()=="lastupdate"){ xuDate = hpProp.getTextContent();}
-							if(hpProp.getNodeName()=="bmi"){ xbmi = Double.valueOf(hpProp.getTextContent());}
-						}
-					}
-				}
-
-				HealthProfile hp = new HealthProfile(w, h, xbmi, xuDate);
-				//System.out.println(hp);
-				personList.add(new Person(xName,xSurname,hp,xbirth, pID));
-			}
-		}
-		for(Person pers : personList){
-			System.out.println(pers.getId() + " " + pers.getFirstname() + " " + pers.getLastname());
-			System.out.println(pers.getBirthday());
-			System.out.println(pers.gethProfile());
-		}
-		return personList;
-		}
-
+	//main method
 
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		HealthProfileReader hPR = new HealthProfileReader();
@@ -186,13 +55,17 @@ public class HealthProfileReader {
 
 		int argCount = args.length;
 		if (argCount == 0) {
+			System.out.println("Please give me at least one parameter");
 
-			System.out.println("I cannot get people from database in the air, please give me an ID.. ");
+			// handles the following command:  gw|gh    <|>|=    value
+			// gw  stands for getWeight
+			// gh  stands for getHeight
+			// then it need an operator among <,> or =
+			// then it need a value
+			// read the function comment for further informations
+
 		} else if (argCount == 3) {
 			String method = args[0];
-			System.out.println(args[0]);
-			System.out.println(args[1]);
-			System.out.println(args[2]);
 			String operator = args[1];
 			String value = args[2];
 			if(method.equals("gh")){
@@ -200,31 +73,45 @@ public class HealthProfileReader {
 			} else if(method.equals("gw")){
 				hPR.getWeightOp(operator,value);
 			}
+		// handles when we pass one parameter to the main method
 
 		} else if(argCount == 1){
+
+			// option getall prints all people details
+
 			if(args[0].equals("getall")){
 				hPR.getAllPeople();
 			} else {
+
+				// if we pass an ID as parameter it will print the Health Profile
+				// of the given ID, it prints an error if ID does not exists
+
 				System.out.println("\n\nThe health profile of the given id is:");
 				hPR.displayHealthProfileX(args[0]);
 			}
 		} else if (argCount == 2) {
 
-				if(args[0].equals("gh")){
+			// it reads the first parameter and then it
+			// recognizes wich method we would like to execute gw or gh
+			// for the given ID
+
+			if(args[0].equals("gh")){
 					System.out.println("\n \nThe Height for the given id is:");
 					hPR.getxHeight(args[1]);
 				}
-				else if(args[0].equals("gw")){
+
+			else if(args[0].equals("gw")){
 					System.out.println(" \n\nThe Weight for the given id is:");
 					hPR.getXWeight(args[1]);
 				}
 
 		} else {
+			// Handles malformed args when executing main method
 			System.out.println("BAD COMMAND");
 			}
-
-		// add the case where there are 3 parameters, the third being a string that matches "weight", "height" or "bmi"
 		}
+
+	// prints all the people details using XPATH
 
 	private void getAllPeople() throws XPathExpressionException{
 		XPathExpression expr = xpath.compile ("//person");
@@ -233,6 +120,9 @@ public class HealthProfileReader {
 			System.out.println(nodes.item(i).getTextContent());
 		}
 	}
+
+	// prints the Health Profile of a given ID using XPATH
+
 	private void displayHealthProfileX(String PId) throws XPathExpressionException{
 		XPathExpression expr = xpath.compile("//person[@id='" + PId + "']/healthprofile");
 		//("//person[weight " + operator + "'" + value + "']");
@@ -243,6 +133,8 @@ public class HealthProfileReader {
 		if(nodes.getLength()==0){System.out.println("\n \n The given ID is not in our database.");}
 	}
 
+	// prints the Weight of a given ID using XPATH
+
 	private void getXWeight(String id) throws XPathExpressionException{
 		XPathExpression expr = xpath.compile ("/people/person[@id='"+id+"']/healthprofile/weight");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
@@ -252,6 +144,8 @@ public class HealthProfileReader {
 
 	}
 
+	// prints the Height of a given ID using XPATH
+
 	private void getxHeight(String id) throws XPathExpressionException {
 		XPathExpression expr = xpath.compile ("/people/person[@id='"+id+"']/healthprofile/height");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
@@ -260,6 +154,11 @@ public class HealthProfileReader {
 		}
 	}
 
+
+	// prints all people details if the person fullfill certains conditions
+	// e.g.: height > 1.55 or height = 1.75 or or Height < 1.78
+
+
 	private void getHeightOp(String operator, String value) throws XPathExpressionException {
 		XPathExpression expr = xpath.compile("//person[healthprofile/height " + operator + "'" + value + "']");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
@@ -267,6 +166,9 @@ public class HealthProfileReader {
 			System.out.println(nodes.item(i).getTextContent());
 		}
 	}
+
+	// prints all people details if the person fullfill certains conditions
+	// e.g.: Weight > 55 or Weight = 78 or Weight < 78
 
 	private void getWeightOp(String operator, String value) throws XPathExpressionException {
 		XPathExpression expr = xpath.compile ("//person[healthprofile/weight "+ operator + "'" + value + "']"); //("//person[weight " + operator + "'" + value + "']");
