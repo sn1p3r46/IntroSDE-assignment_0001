@@ -15,7 +15,6 @@ The project is divided in different packages:
 <li><code>dao</code>: this package contains <code>PeopleStore.java</code> which stores and returns People object used for creating the JSON output trough the jackson library.</li>
 <li><code>models</code>: this package contains <code>People.java</code> and <code>HealthProfile.java</code>, which are the representation of Person and HealthProfile objects and a <code>RandomHelper.java</code> class that provides some usefull methods for contructors (some of them are not used in this assignment)</li>
 <li><code>assignment</code>: this package contains <code>Marshaller.java</code>, which provides the marshalling service, and <code>UnMarshaller.java</code> which provides the un-marshalling "service" </li>
-</ul>
 <li><code>main</code>: this package contains <code>HealthProfileReader</code>, which provides methods for the lab3 based exercises and <code>PeopleStore.java</code> used to create the json output file</li>
 </ul>
 
