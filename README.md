@@ -1,4 +1,8 @@
 # IntroSDE
+
+Andrea Galloni - andreagalloni92[at][goooooglemail][dot][com] 
+
+
 <h1>introsde-2015-assignment-1</h1>
 
 First assignment of Introduction of Service Design and Engineering class. 
