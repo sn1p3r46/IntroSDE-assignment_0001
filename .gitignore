@@ -10,14 +10,8 @@
 
 
 people1.xml
-src/
 src/ivy
 src/lib        
 src/build
 *.iml
-
-/*/build
-/*/ivy
-/*/lib
-
 *.idea
