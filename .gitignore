@@ -10,7 +10,7 @@
 
 <<<<<<< HEAD
 people1.xml
-src/assignment
+src/
 src/ivy
 src/lib        
 src/build
@@ -19,7 +19,7 @@ src/build
 /*/build
 /*/ivy
 /*/lib
-/*/assignment
+
 
 .*
 !/.gitignore
