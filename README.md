@@ -55,7 +55,7 @@ This part is handled three classes: <code>Marshaller.java</code>, <code>UnMarsha
 <li><code>ant execute.getHeightByCondition</code>: prints all people's heights that satisfy a condition <code>people.xml</code></li>
 <li><code>ant execute.getHeightByCondition</code>: rints all people's weights that satisfy a condition <code>people.xml</code></li>
 <li><code>ant execute.getHealthFromPid_5</code>: prints a person's health profile given an ID by running </li>
-<li><code>ant execute.UnMarshaller</code>: executes the marshalling to a XML file <code>people1.xml<code></li>
-<li><code>ant execute.Marshaller</code>: executes the un-marshalling, prints the result on screen</li>
+<li><code>ant execute.UnMarshaller</code>: executes the Un-marshalling to a XML file <code>people1.xml<code></li>
+<li><code>ant execute.Marshaller</code>: executes the marshalling and  prints the result on screen</li>
 </ul>
 
