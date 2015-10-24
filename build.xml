@@ -150,7 +150,7 @@
     </target>
 
     <target name="execute.getHealthFromPid_5">
-        <echo message="-> Print all people details" />
+        <echo message="-> Printing the 5 id corresponding health profile" />
         <echo message="" />
         <java classname="main.HealthProfileReader"
               classpath="${build.dir}">
@@ -188,6 +188,19 @@
             <arg line="gh" />
             <arg line="'&gt;'" />
             <arg line="'1.90'" />
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+    <target name="execute.PeopleToJSON">
+        <echo message="-> Saving JSON" />
+        <echo message="" />
+        <java classname="main.PeopleToJava"
+              classpath="${build.dir}">
             <classpath>
                 <fileset dir="${lib.dir}">
                     <include name="**/*.jar" />

@@ -27,6 +27,62 @@ public class HealthProfileReader {
     XPath xpath;
 
 
+	public List<Person> getAllPersonsObjects() throws XPathExpressionException {
+
+		XPathExpression expr = xpath.compile ("//person");
+		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+		List<Person> personList = new ArrayList<Person>();
+		System.out.println(nodes.getLength());
+
+		Node node;
+
+		for (int p = 0; p < nodes.getLength(); p++) {
+			node = nodes.item(p);
+			if (node!=null){
+				Long pID = Long.valueOf(node.getAttributes().getNamedItem("id").getNodeValue());
+				NodeList attrList = node.getChildNodes();
+				Node prop;
+				String xName = null;
+				String xSurname = null;
+				String xbirth = null;
+				double h = 0;
+				double w = 0;
+				String xuDate = null;
+				double xbmi = 0;
+				for(int i=0; i < attrList.getLength(); i++){
+					prop = attrList.item(i);
+					if(prop.getNodeName()=="firstname"){
+						xName = prop.getTextContent();
+
+					}else if(prop.getNodeName()=="lastname"){
+						xSurname= prop.getTextContent();
+					}else if(prop.getNodeName()=="birthdate"){
+						xbirth = prop.getTextContent();
+					}else if(prop.getNodeName()=="healthprofile"){
+						NodeList hpAttributesList = prop.getChildNodes();
+						for (int j = 0; j< hpAttributesList.getLength(); j++ ){
+							Node hpProp = hpAttributesList.item(j);
+							if(hpProp.getNodeName()=="weight"){ w = Double.valueOf(hpProp.getTextContent());}
+							if(hpProp.getNodeName()=="height"){ h = Double.valueOf(hpProp.getTextContent());}
+							if(hpProp.getNodeName()=="lastupdate"){ xuDate = hpProp.getTextContent();}
+							if(hpProp.getNodeName()=="bmi"){ xbmi = Double.valueOf(hpProp.getTextContent());}
+						}
+					}
+				}
+
+				HealthProfile hp = new HealthProfile(w, h, xbmi, xuDate);
+				//System.out.println(hp);
+				personList.add(new Person(xName,xSurname,hp,xbirth, pID));
+			}
+		}
+		for(Person pers : personList){
+			System.out.println(pers.getId() + " " + pers.getFirstname() + " " + pers.getLastname());
+			System.out.println(pers.getBirthday());
+			System.out.println(pers.gethProfile());
+		}
+		return personList;
+	}
+
 	// this function load the .xml file
     public void loadXML() throws ParserConfigurationException, SAXException, IOException {
 

@@ -15,3 +15,4 @@ src/lib
 src/build
 *.iml
 *.idea
+/nbproject/private/
