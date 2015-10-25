@@ -50,7 +50,6 @@ This part is handled three classes: <code>Marshaller.java</code>, <code>UnMarsha
 <code>ant execute.evaluation</code>: download dependencies, creates java classes from <code>people.xsd</code> and run targets specified below:
 
 <ul>
-<li><code>ant execute.PeopleWriter</code>: creates <code>people.xml</code> from Java object by running <code>PeopleWriter.java</code></li>
 <li><code>ant execute.getAllPeople</code>: prints all people contained in <code>people.xml</code></li>
 <li><code>ant execute.getHeightByCondition</code>: prints all people's heights that satisfy a condition <code>people.xml</code></li>
 <li><code>ant execute.getHeightByCondition</code>: rints all people's weights that satisfy a condition <code>people.xml</code></li>
