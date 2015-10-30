@@ -75,11 +75,11 @@ public class HealthProfileReader {
 				personList.add(new Person(xName,xSurname,hp,xbirth, pID));
 			}
 		}
-		for(Person pers : personList){
-			System.out.println(pers.getId() + " " + pers.getFirstname() + " " + pers.getLastname());
-			System.out.println(pers.getBirthday());
-			System.out.println(pers.gethProfile());
-		}
+		//for(Person pers : personList){
+		//	System.out.println(pers.getId() + " " + pers.getFirstname() + " " + pers.getLastname());
+		//	System.out.println(pers.getBirthday());
+		//	System.out.println(pers.gethProfile());
+		//}
 		return personList;
 	}
 

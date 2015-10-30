@@ -29,7 +29,7 @@ public class UnMarshaller {
             SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
 
             // Uses the people.xsd schema to validate the XML file given as input
-            Schema schema = schemaFactory.newSchema(new File("people.xsd"));
+            Schema schema = schemaFactory.newSchema(new File("src/people.xsd"));
             unMarshaller.setSchema(schema);
 
             CustomValidationEventHandler validationEventHandler = new CustomValidationEventHandler();
