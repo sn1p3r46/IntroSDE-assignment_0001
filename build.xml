@@ -210,7 +210,7 @@
         </java>
     </target>
     <target name="execute.evaluation" depends="compile , execute.JAXBMarshaller, execute.getAllPeople,execute.getHeightByCondition,execute.getWeightByCondition,
-		execute.UnMarshaller,execute.getHealthFromPid_5">
+		execute.UnMarshaller,execute.getHealthFromPid_5, execute.PeopleToJson">
         <echo message="Executing everything!" />
     </target>
 </project>
