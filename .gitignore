@@ -8,6 +8,8 @@
 *.war
 *.ear
 
+.classpath
+.project
 /bin
 people1.xml
 src/ivy
