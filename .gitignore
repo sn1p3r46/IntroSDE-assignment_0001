@@ -16,3 +16,5 @@ src/build
 *.iml
 *.idea
 /nbproject/private/
+*.json
+

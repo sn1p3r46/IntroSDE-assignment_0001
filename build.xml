@@ -196,7 +196,7 @@
             </classpath>
         </java>
     </target>
-    <target name="execute.PeopleToJSON">
+    <target name="execute.PeopleToJson">
         <echo message="-> Saving JSON" />
         <echo message="" />
         <java classname="main.PeopleToJava"

@@ -3,11 +3,13 @@ package main;
 
 import models.HealthProfile;
 import models.Person;
-import javax.xml.*;
+//import javax.xml.*;
 import javax.xml.xpath.XPathExpressionException;
+
+//import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.util.List;
-import models.HealthProfile.*;
+//import models.HealthProfile.*;
 
 import java.io.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,9 +26,10 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 public class PeopleToJava {
     public static PeopleStore people = new PeopleStore();
 
-    public static void main() throws Exception {
+    public static void main(String[] args) throws JsonProcessingException, XPathExpressionException, IOException, Exception {
 
         HealthProfileReader hPR = new HealthProfileReader();
+        hPR.loadXML();
         List<Person> peopleList = hPR.getAllPersonsObjects();
         for(int i=0; i<peopleList.size(); i++ ){
             people.getData().add(peopleList.get(i));
