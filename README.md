@@ -1,11 +1,16 @@
-# IntroSDE
 
-Andrea Galloni - <code>andreagalloni92[at][goooooglemail][dot][com]</code>
+# Introsde 2015 Assignment 3 
 
+**Student:** Andrea Galloni ([Twitter](https://twitter.com/andreagalloni92))
 
-<h1>introsde-2015-assignment-1</h1>
+**Organization:** [UniTN](http://www.unitn.it/en)
 
-First assignment of Introduction of Service Design and Engineering class. 
+**Course** [Introduction to Service Design and Engineering](https://sites.google.com/site/introsdeunitn/)
+
+<p align="center">
+  <img src="images/soap.png" width="200">
+</p>
+
 
 <h2>Assignment Structure</h2>
 
