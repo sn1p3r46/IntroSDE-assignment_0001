@@ -10,8 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import models.Person;
 
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by alexander on 21/10/15.

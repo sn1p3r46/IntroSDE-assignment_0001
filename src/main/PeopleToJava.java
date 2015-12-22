@@ -32,6 +32,7 @@ public class PeopleToJava {
         hPR.loadXML();
         List<Person> peopleList = hPR.getAllPersonsObjects();
         for(int i=0; i<peopleList.size(); i++ ){
+        	System.out.println(peopleList.get(i).gethProfile());
             people.getData().add(peopleList.get(i));
             
         }
@@ -46,7 +47,7 @@ public class PeopleToJava {
         mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
 
         String result = mapper.writeValueAsString(people);
-        System.out.println(result);
+        //System.out.println(result);
         mapper.writeValue(new File("people.json"), people);
 		
     }
