@@ -69,7 +69,7 @@ This part is handled three classes: <code>Marshaller.java</code>, <code>UnMarsha
 
 
 <p align="center">
-  <br/><b><a href="http://www.eclipse.org/">Editor Used:</a></b><br/>
+  <br/><b><a href="http://www.eclipse.org/">IDE Used:</a></b><br/>
   <a href="http://www.eclipse.org/">
   <img src="https://eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-800x188.png" width="200">
   </a>
